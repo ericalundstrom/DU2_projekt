@@ -98,7 +98,18 @@ function toggle_cities(event) {
     NO RETURN VALUE
 
   */
+  let all_cities = document.querySelectorAll("#country_filter li");
+  let button = document.querySelector("button");
+  button.classList.toggle("selected");
 
+  function test_function(params) {
+    if (button.classList !== ("selected")) {
+      params.classList.toggle("selected");
+      update_programmes();
+    }
+  }
+
+  array_each(all_cities, test_function);
 }
 
 

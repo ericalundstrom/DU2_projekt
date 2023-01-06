@@ -196,40 +196,72 @@ function create_countries_cities_filters() {
 // ABSTRACT AND WRITE SPECIFICATION
 //    As you can see, all three functions below do basically the same thing.
 //    Abstract them to one function, and write the specification of that function.
-function create_levels_filter() {
-  function create_level(level) {
+// function create_levels_filter() {
+//   function create_level(level) {
+//     const dom = create_filter_element({
+//       parent: document.querySelector("#level_filter > ul"),
+//       class: "selected",
+//       textContent: level.name,
+//     });
+//     dom.dataset.id = level.id;
+//   }
+//   array_each(LEVELS, create_level);
+// }
+// // Create Subjects Filter
+// function create_subjects_filter() {
+//   function create_subject(subject) {
+//     const dom = create_filter_element({
+//       parent: document.querySelector("#subject_filter > ul"),
+//       class: "selected",
+//       textContent: subject.name,
+//     });
+//     dom.dataset.id = subject.id;
+//   }
+//   array_each(SUBJECTS, create_subject);
+// }
+// // Create Search Field
+// function create_language_filter() {
+//   function create_element(data) {
+//     const dom = create_filter_element({
+//       parent: document.querySelector("#language_filter > ul"),
+//       class: "selected",
+//       textContent: data.name,
+//     });
+//     dom.dataset.id = data.id;
+//   }
+//   array_each(LANGUAGES, create_element);
+// }
+
+// CREATE_FILTER
+//
+// ARGUMENT: Funktionen tar emot två argument. 
+// - Filter_type (En variabel med en sträng som hänvisar parent till rätt förälder) 
+// - DATA(En variabel som hänvisar till rätt array)
+//
+// SIDE-EFFECTS:
+// Funktionen anropar create med array_each(DATA, create). Funktionen create skapar ett objekt med nyklarna parent, class och textContent.
+// parent:  Väljer ut element på HTML sidan med "filter_type" och filter som id.
+// class: DOM-elementet får klassen selected.
+// textContent: DOM-elementet får textcontent baserad på array[i] nyckeln (data.name)
+// Funktionen ger ett data-id till objektet (dom) som är baserat på array.name.
+//
+//
+// Funktionen anropas tre olika gånger i index.js med de olika arrays (LANGUAGE, SUBJECTS, LEVELS).
+//
+// RETURVÄRDE:
+// Funktionen returnerar ingenting. 
+//
+
+function create_filter(filter_type, DATA) {
+  function create(data) {
     const dom = create_filter_element({
-      parent: document.querySelector("#level_filter > ul"),
-      class: "selected",
-      textContent: level.name,
-    });
-    dom.dataset.id = level.id;
-  }
-  array_each(LEVELS, create_level);
-}
-// Create Subjects Filter
-function create_subjects_filter() {
-  function create_subject(subject) {
-    const dom = create_filter_element({
-      parent: document.querySelector("#subject_filter > ul"),
-      class: "selected",
-      textContent: subject.name,
-    });
-    dom.dataset.id = subject.id;
-  }
-  array_each(SUBJECTS, create_subject);
-}
-// Create Search Field
-function create_language_filter() {
-  function create_element(data) {
-    const dom = create_filter_element({
-      parent: document.querySelector("#language_filter > ul"),
+      parent: document.querySelector(`#${filter_type}_filter > ul`),
       class: "selected",
       textContent: data.name,
     });
     dom.dataset.id = data.id;
   }
-  array_each(LANGUAGES, create_element);
+  array_each(DATA, create);
 }
 
 

@@ -289,9 +289,34 @@ function create_programme(programme) {
     NO RETURN VALUE
 
   */
+  document.querySelector("#programmes > p").innerHTML = "";
+
+  let sun_days = CITIES[UNIVERSITIES[programme.universityID].cityID].sun;
+
+  let ul_dom = document.createElement("li");
+  ul_parent = document.querySelector("#programmes >ul").append(ul_dom);
+  ul_dom.classList.add("programme");
+  ul_dom.innerHTML = `
+    <div class="first_div">
+    <p><b>${programme.name}</b></p>
+    <p>${UNIVERSITIES[programme.universityID].name}</p>
+    <p>${CITIES[UNIVERSITIES[programme.universityID].cityID].name}, ${COUNTRIES[CITIES[UNIVERSITIES[programme.universityID].cityID].countryID].name}</p >
+    <p>${LEVELS[programme.levelID - 1].name}, ${SUBJECTS[programme.subjectID].name}, ${LANGUAGES[programme.languageID].name}</p>
+    </div >
+    <div class="more_info"></div>
+    <div class="bottom_programme">${CITIES[UNIVERSITIES[programme.universityID].cityID].name}, sun-index: ${CITIES[UNIVERSITIES[programme.universityID].cityID].sun} (${percenter(sun_days, 365)}%)</div>
+  `;
+
+  let all_city_pictures = CITIES[UNIVERSITIES[programme.universityID].cityID].imagesNormal.length;
+  let random_number = get_random_number(all_city_pictures, 1);
+  let name_of_city = CITIES[UNIVERSITIES[programme.universityID].cityID].name.toLocaleLowerCase();
+  let normal_jpg = `_normal_${random_number}.jpg`;
+  ul_dom.style.backgroundImage = `url(./media/geo_images/${name_of_city}${normal_jpg})`;
+
 
 }
 
+array_each(PROGRAMMES, create_programme);
 
 // G
 // CODE according to the specification

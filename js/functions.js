@@ -336,6 +336,15 @@ function update_programmes() {
 
   */
 
+  let numbers_of_programmes = read_filters();
+  let programmes_shown_before = document.querySelector("#programmes > ul");
+  let programmes_paragraf = document.querySelector("#programmes > p");
+
+  if (numbers_of_programmes.length === 0) {
+    programmes_paragraf.innerHTML = "Inga program upfyller nuvarande filter.";
+    programmes_shown_before.innerHTML = "";
+  }
+  array_each(numbers_of_programmes, create_programme);
 }
 
 
